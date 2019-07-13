@@ -1,0 +1,32 @@
+<h1>
+  {{ title }}
+</h1>
+<div class="element" *ngIf="cities$ | async | selectedType:selectedType as city; else loaderEl">
+
+  <div class="element-left">
+    <main-widget 
+    [city]="city"
+    (typeEmitter)="selectedType = $event" 
+    (hotelEmitter)="selectedHotel = $event">
+    </main-widget>
+  </div>
+
+  <div class="element-right">
+    <weather-widget 
+    [weather]="city.weather">
+    </weather-widget>
+    
+    <hotel-profile-widget  
+    [city]="city"
+    [hotelProfile]="city.hotelProfile" 
+    [selectedHotel]="selectedHotel">
+    </hotel-profile-widget>
+  </div>
+  <div class="clear"> </div>
+</div>
+<ng-template class="loader" #loaderEl>Loading...</ng-template>
+<div class="copy-right">
+  <p>© 2015 Hot Weather Widget. All rights reserved | Design by <a href="http://w3layouts.com/" target="_blank">
+      W3layouts </a></p>
+
+</div>
