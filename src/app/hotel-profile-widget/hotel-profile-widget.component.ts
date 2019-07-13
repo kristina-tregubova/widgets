@@ -9,7 +9,6 @@ import { ICity, IHotel } from '../data-model/ICity';
 export class HotelProfileWidgetComponent implements OnInit {
 
   @Input() public city: ICity;
-  @Input() public hotelProfile: Object;
   @Input() public selectedHotel: IHotel;
 
   public constructor() { }

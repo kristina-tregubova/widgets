@@ -7,7 +7,11 @@ import { WeatherWidgetComponent } from './weather-widget/weather-widget.componen
 import { HotelProfileWidgetComponent } from './hotel-profile-widget/hotel-profile-widget.component';
 import { selectedTypePipe } from './hotel-profile-widget/selectedType.pipe';
 import { phoneNumberPipe } from './hotel-profile-widget/phoneNumber.pipe';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BASE_URL_TOKEN, BASE_URL } from './config';
+// import { InterceptorService } from './interceptor.service';
+import { AppService } from './app.service';
+import { HotelCardComponent } from './main-widget/hotel-card/hotel-card.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +20,18 @@ import { HttpClientModule } from '@angular/common/http';
     WeatherWidgetComponent,
     HotelProfileWidgetComponent,
     selectedTypePipe,
-    phoneNumberPipe
+    phoneNumberPipe,
+    HotelCardComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AppService,
+    {provide: BASE_URL_TOKEN, useValue: BASE_URL},
+    // {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

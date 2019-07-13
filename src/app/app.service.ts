@@ -1,21 +1,20 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ICity } from 'src/app/data-model/ICity';
+import { BASE_URL_TOKEN } from './config';
 
 
-@Injectable({
-  providedIn: 'root'
-})
-
+@Injectable()
 export class AppService {
   
   public constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    @Inject(BASE_URL_TOKEN) private baseUrl: string
   ) {
   }
 
   public getCities(): Observable<ICity[]> {
-    return this.http.get<ICity[]>('https://my-json-server.typicode.com/cloudswillopenforme/Hotels-Widgets/cities');
+    return this.http.get<ICity[]>(`${this.baseUrl}/cities`);
   }
 }
